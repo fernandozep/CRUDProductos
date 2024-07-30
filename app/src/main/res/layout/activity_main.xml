@@ -9,14 +9,13 @@
     tools:context=".MainActivity"
     android:padding="16dp">
 
-    <!-- Input for Username -->
+
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Username" />
 
-    <!-- Input for Password -->
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
@@ -24,48 +23,41 @@
         android:hint="Password"
         android:inputType="textPassword" />
 
-    <!-- Button to Log In -->
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Log In" />
 
-    <!-- ListView for Products -->
     <ListView
         android:id="@+id/lvProducts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <!-- Input for Product Name -->
     <EditText
         android:id="@+id/etProductName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Product Name" />
 
-    <!-- Button to Add Product -->
     <Button
         android:id="@+id/btnAddProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Product" />
 
-    <!-- Input for Product Name to Update -->
     <EditText
         android:id="@+id/etUpdateProductName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Product Name to Update" />
 
-    <!-- Button to Update Product -->
     <Button
         android:id="@+id/btnUpdateProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Update Product" />
 
-    <!-- Button to Delete Product -->
     <Button
         android:id="@+id/btnDeleteProduct"
         android:layout_width="match_parent"

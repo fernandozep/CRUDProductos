@@ -31,7 +31,6 @@ public class ApiClient {
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonBody,
                 listener, errorListener);
-
         queue.add(request);
     }
 
@@ -39,12 +38,14 @@ public class ApiClient {
         AUTH_TOKEN = token;
     }
 
-    public static void addProduct(RequestQueue queue, String name,
+    public static void addProduct(RequestQueue queue, String name, String description, double price,
                                   Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
-        String url = BASE_URL + "add_product.php";
+        String url = BASE_URL + "create_product.php";
         JSONObject jsonBody = new JSONObject();
         try {
             jsonBody.put("name", name);
+            jsonBody.put("description", description);
+            jsonBody.put("price", price);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -55,17 +56,16 @@ public class ApiClient {
             public java.util.Map<String, String> getHeaders() {
                 java.util.Map<String, String> headers = new java.util.HashMap<>();
                 headers.put("Authorization", "Bearer " + AUTH_TOKEN);
+                headers.put("Content-Type", "application/json");
                 return headers;
             }
         };
-
         queue.add(request);
     }
 
     public static void getProducts(RequestQueue queue,
                                    Response.Listener<JSONArray> listener, Response.ErrorListener errorListener) {
         String url = BASE_URL + "get_products.php";
-
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 listener, errorListener) {
             @Override
@@ -76,7 +76,6 @@ public class ApiClient {
                 return headers;
             }
         };
-
         queue.add(request);
     }
 
@@ -84,32 +83,14 @@ public class ApiClient {
 
     public static void deleteProduct(RequestQueue queue, int productId,
                                      Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
-        String url = BASE_URL + "delete_product.php?id=" + productId;
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, url, null,
-                listener, errorListener) {
-            @Override
-            public java.util.Map<String, String> getHeaders() {
-                java.util.Map<String, String> headers = new java.util.HashMap<>();
-                headers.put("Authorization", "Bearer " + AUTH_TOKEN);
-                return headers;
-            }
-        };
-
-        queue.add(request);
-    }
-
-    public static void updateProduct(RequestQueue queue, int productId, String name,
-                                     Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
-        String url = BASE_URL + "update_product.php";
+        String url = BASE_URL + "delete_product.php";
         JSONObject jsonBody = new JSONObject();
         try {
             jsonBody.put("id", productId);
-            jsonBody.put("name", name);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, url, jsonBody,
                 listener, errorListener) {
             @Override
@@ -119,7 +100,30 @@ public class ApiClient {
                 return headers;
             }
         };
+        queue.add(request);
+    }
 
+    public static void updateProduct(RequestQueue queue, int productId, String name, String description, double price,
+                                     Response.Listener<JSONObject> listener, Response.ErrorListener errorListener) {
+        String url = BASE_URL + "update_product.php";
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("id", productId);
+            jsonBody.put("name", name);
+            jsonBody.put("description", description);
+            jsonBody.put("price", price);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, url, jsonBody,
+                listener, errorListener) {
+            @Override
+            public java.util.Map<String, String> getHeaders() {
+                java.util.Map<String, String> headers = new java.util.HashMap<>();
+                headers.put("Authorization", "Bearer " + AUTH_TOKEN);
+                return headers;
+            }
+        };
         queue.add(request);
     }
 }

@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             String token = response.getString("token");
                             ApiClient.setAuthToken(token);
-                            Toast.makeText(MainActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "L", Toast.LENGTH_SHORT).show();
                             loadProducts(); // Carga los productos después del login
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -73,31 +73,13 @@ public class MainActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MainActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "d", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
 
 
-        btnAddProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = etProductName.getText().toString();
-                ApiClient.addProduct(queue, name, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Toast.makeText(MainActivity.this, "Product added", Toast.LENGTH_SHORT).show();
-                        loadProducts();
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MainActivity.this, "Failed to add product", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
 
         btnDeleteProduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,45 +90,22 @@ public class MainActivity extends AppCompatActivity {
                     ApiClient.deleteProduct(queue, productId, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            Toast.makeText(MainActivity.this, "Product deleted", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Pd", Toast.LENGTH_SHORT).show();
                             loadProducts();
                         }
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(MainActivity.this, "Failed to delete product", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "F", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
-                    Toast.makeText(MainActivity.this, "Please select a product", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Pl", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        btnUpdateProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = lvProducts.getCheckedItemPosition();
-                if (position >= 0) {
-                    int productId = productIds.get(position);
-                    String name = etUpdateProductName.getText().toString();
-                    ApiClient.updateProduct(queue, productId, name, new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            Toast.makeText(MainActivity.this, "Product updated", Toast.LENGTH_SHORT).show();
-                            loadProducts();
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(MainActivity.this, "Failed to update product", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } else {
-                    Toast.makeText(MainActivity.this, "Please select a product", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
     }
 
     private void loadProducts() {
@@ -169,14 +128,14 @@ public class MainActivity extends AppCompatActivity {
                     productAdapter.notifyDataSetChanged();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(MainActivity.this, "Failed to parse product data", Toast.LENGTH_SHORT).show();
+
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Toast.makeText(MainActivity.this, "Failed to load products", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
